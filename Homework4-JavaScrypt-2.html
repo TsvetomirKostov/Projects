@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script type="text/javascript">
+
+    alert(`Maze bot v1 на Вашите услуги`);
+
+    //Задача 1: Въвеждане на данни за потребителите
+
+    let firstName = prompt("Как се казваш - първо име ?"); 
+    let secondName = prompt("Как е вашата фамилия ? ");
+    let personAge = prompt("Каква е Вашата възраст ? ");
+    let personGender = prompt("Какъв е Вашият пол ? ");
+    
+    console.log(`Първо име ${firstName}`);
+    console.log(`Вашата фамилия ${secondName}`);
+    console.log(`Вашата възраст ${personAge}`);
+    console.log(`Вашият пол ${personGender}`);
+
+    // Задача 2: Особености за въвеждане на данните
+
+   
+    let isPlayerAdult = personAge >= 18;
+    let isPlayerMinor = personAge < 18;
+    let isPlayerMan = personGender;
+    let isPlayerWoman = personGender;
+    let isPlayerMenMinor = (isPlayerMan) && (isPlayerMinor);
+    let isPlayerWomanMinor = (isPlayerWoman) && (isPlayerMinor);
+    let numberID = prompt("Въведете Вашият факултетен номер");
+
+
+
+    if(isPlayerMan == `Man`) {
+        alert(`Здравейте г-н ` + secondName);
+    }
+    if(isPlayerWoman == `Woman`) {
+        alert(`Здравейте г-жо ` + secondName);
+    }
+    if(isPlayerMenMinor == `Boy`) {
+        alert(`Здрасти малкия, не пускаме дечица тука - бягай за бира`);
+    }
+    if(isPlayerWomanMinor == `Girl`) {
+        alert(`Здрасти малката, не пускаме дечица тука - отивай да си играеш`);
+    }
+    
+    // Задача 3: Извеждане на съобщение за потребителя
+
+
+    alert(`Добре дошъл в мазето на баба ` + firstName + ' ' + secondName);
+    alert(`Ти се идентифицира с номер ` + numberID);
+    alert(`Ти си на ` + personAge + ` години`);
+
+    // Задача 4: Деклариране на променливите от таблицата
+
+
+
+    let articleWine = "Ябълково вино";
+    let articleMeet = "Пушено месо";
+    let articleJam = "Сливов мармалад";
+    let articlePeppers = "Мариновани чушки";
+    let articleBank = "Прасенце касичка";
+
+    // Задача 5: Деклариране на количеството на продуктите
+
+    let litresWine = 10;
+    let kilosMeet = 5;
+    let countJam = 9;
+    let kilosPeppers = 4;
+    let bankMoney = 184.35;
+
+    // Задача 6: Деклариране на номерата на продуктите
+
+    let signatureWine = (`C7544${litresWine}`);
+    let signatureMeet = (`M7441${kilosMeet}`);
+    let signatureJam = (`S6491${countJam}`);
+    let signaturePeppers = (`P7485${kilosPeppers}`);
+    let signatureBank = (`B6584${bankMoney}`);
+
+    // Задача 7: Деклариране на продуктите в мазето
+     
+
+    alert(`Отчет за продуктите в мазето`);
+
+
+    // const Wine = {Продукт:`${articleWine}`, Брой:`${litresWine}`, СериенНомер:`${signatureWine}`}
+    // const Meet = {Продукт:`${articleMeet}`, Брой:`${kilosMeet}`, СериенНомер:`${signatureMeet}`}
+    // const Jam = {Продукт:`${articleJam}`, Брой:`${countJam}`, СериенНомер:`${signatureJam}`}
+    // const Peppers = {Продукт:`${articlePeppers}`, Брой:`${kilosPeppers}`, СериенНомер:`${signaturePeppers}`}
+    // const Bank = {Продукт:`${articleBank}`, Брой:`${bankMoney}`, СериенНомер:`${signatureBank}`}
+
+    // console.table([Wine, Meet, Jam, Peppers, Bank]);
+
+
+    const products = [
+    ["Ябълково","Пушено","Сливов","Мариновани","Прасенце"],
+    ["Вино","Месо","Мармалад","Чушки","Касичка"],
+    [10,5,9,4, 184.35],
+    ["C7544","M7441","S6491","P7485","B6584"],
+    ]
+    function tableCreate(products){
+        var body = document.body,//Change the body element to the element that you want the table to be inserted into
+            tbl  = document.createElement('table');
+        tbl.style.width  = '100px';
+        tbl.style.border = '1px solid black';
+
+        for(var i = 0; i < products.length; i++){
+            var tr = tbl.insertRow();
+            for(var j = 0; j < products[i].length; j++){
+                    var td = tr.insertCell();
+                    td.appendChild(document.createTextNode(products[i][j]));
+                    td.style.border = '1px solid black';
+
+                
+            }
+        }
+        body.appendChild(tbl);
+    }
+
+    tableCreate(products);
+
+
+    // Задача 8: Извеждане на message за дарение
+
+    let answerPerson = prompt(`Желаете ли дарите пари? Да/Не`);
+    let answerYesPerson = answerPerson == "Да";
+    let answerNoPerson = answerPerson == "Не";    
+        
+
+    if(isPlayerAdult && answerNoPerson) {
+            alert("Стиснат сте !!!"); 
+        }
+
+    if(isPlayerAdult && answerYesPerson) {
+                    
+        }
+        let answer = prompt('Въведете сума за дарение');
+        let answerPrice = 0;
+        answerPrice = (+ answer + (0.2 * + answer));
+            
+
+         alert(`Сумата, която трябва да дарите с 20% обложен данък е ${answerPrice}`);
+
+</script>
+
+</body>
+</html>
