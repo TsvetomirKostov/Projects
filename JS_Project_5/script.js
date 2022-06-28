@@ -49,11 +49,11 @@ const optionalQuestions = {
     QUESTIONASPIRATOR: "Разполагате ли с аспиратор? - (Y/N)"
 }
 
-let questionFridge;
-let questionGasStove;
-let questionCombiOven;
-let questionElectricGrill;
-let questionAspirator;
+// let questionFridge;
+// let questionGasStove;
+// let questionCombiOven;
+// let questionElectricGrill;
+// let questionAspirator;
 
 
 
