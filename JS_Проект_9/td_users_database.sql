@@ -14,16 +14,16 @@ CREATE TABLE td_users(
 
 -- (CREATE) -- създаване на нов запис
 INSERT INTO td_users(username, password, email, age)
-VALUES("tsvetomirkostov", "password", "cvetomirnkostov@abv.bg", 29);
+VALUES("petarpetrov", "password", "mymail@mymail.bg", 29);
 
 INSERT INTO td_users(username, password, email, age)
-VALUES("elenakostova", "password1", "elenakostova@abv.bg", 27);
+VALUES("peshopetkov", "password1", "mymail1@mymail.bg", 27);
 
 INSERT INTO td_users(username, password, email, age)
-VALUES("ninakostova", "password2", "ninakostova@abv.bg", 49);
+VALUES("ivandimitrov", "password2", "mymail2@mymail.bg", 49);
 
 INSERT INTO td_users(username, password, email, age)
-VALUES("nikolaikostov", "password2", "nikolaikostov@nikcho.bg", 58);
+VALUES("nikolaiivanov", "password2", "mymail3@mymail.bg", 58);
  
  -- (READ) -- Четене на съществуващ запис от базата данни
 SELECT email, age 
@@ -32,7 +32,7 @@ FROM td_users;
 -- (READ) -- Четене на конкретна информация
 SELECT *
 FROM td_users
-WHERE email = "elenakostova@abv.bg";
+WHERE email = "mymail1@mymail.bg";
 
 SELECT *
 FROM td_users
@@ -40,16 +40,16 @@ WHERE age >= 40;
 
 SELECT *
 FROM td_users
-WHERE age >= 50 AND username = "tsvetomir";
+WHERE age >= 50 AND username = "petar";
 
 SELECT *
 FROM td_users
-WHERE email LIKE "%nikcho.bg";
+WHERE email LIKE "%mail3";
 
 -- (UPDATE) -- Актуализиране на един ред
 UPDATE td_users
 SET age = 62 
-WHERE email = "nikolaikostov@nikcho.bg";
+WHERE email = "mymail3@mymail.bg";
 
 -- (UPDATE) -- Актуализиране на всички редове
 UPDATE td_users
@@ -58,7 +58,7 @@ SET age = 62;
 -- (DELETE) -- Изтриване на един ред
 DELETE 
 FROM td_users
-WHERE email = "nikikostov@abv.bg";
+WHERE email = "mymail3@mymail.bg";
 
 -- (DELETE) -- Изтриване на всички редове
 DELETE 
