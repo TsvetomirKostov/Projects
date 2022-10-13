@@ -1,0 +1,202 @@
+CREATE DATABASE bank_of_tomorrow;
+
+USE bank_of_tomorrow;
+
+CREATE TABLE td_users (
+	
+    -- Първичен ключ на таблицата
+    -- Колонка с уникална числова стойност
+    
+	id INT PRIMARY KEY AUTO_INCREMENT,
+
+	first_name VARCHAR(150) NOT NULL,
+    last_name VARCHAR(150) NOT NULL,
+    extra_name VARCHAR(150),
+    address VARCHAR(150) NOT NULL,
+    phone VARCHAR(10) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    
+    -- 
+    occupation_id INT NOT NULL,
+    department_id INT NOT NULL
+);
+
+-- Премахване на таблица
+-- DROP TABLE td_users;-- 
+
+
+CREATE TABLE td_departments(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(150)
+);
+
+-- Изтриване на цяла таблица
+-- TRUNCATE TABLE td_departments;
+
+INSERT INTO td_departments(title) VALUES('IT');
+INSERT INTO td_departments(title) VALUES('Loan');
+INSERT INTO td_departments(title) VALUES('Risk');
+
+SELECT * FROM td_departments;
+
+ALTER TABLE td_departments
+ADD COLUMN is_active INT DEFAULT 1;
+
+CREATE TABLE td_occupations(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(150)
+);
+
+-- DELETE FROM td_occupations;
+
+INSERT INTO td_occupations(title) VALUES('Operator');
+INSERT INTO td_occupations(title) VALUES('Developer');
+INSERT INTO td_occupations(title) VALUES('Accountent');
+
+SELECT * FROM td_occupations;
+
+INSERT INTO td_users
+(first_name, last_name, extra_name, address, phone, email, occupation_id, department_id)
+VALUES("Tsvetomir", "Kostov", "Nikolaev", "Vratsa", "7545753345", "Tsvetomir.Kostov" "mail@bankoftomorrow.bg", 1, 2);
+VALUES("Tsvetomir", "Petrov", "Tsvetanov", "Sofia", "242324234", 'Tsvetomir.Petrov', "mailmail@bankoftomorrow.bg", 1, 2);
+VALUES("Tsvetomir", "Ivanov", "Borislavov", "Varna", "09230920348234", 'Tsvetomir.Ivanov', "mail@bankoftomorrow.bg", 1, 2);
+VALUES("Tsvetomir", "Dimitrov", "Georgiev", "Burgas", "3453453453", 'Tsvetomir.Dimitrov', "mail@bankoftomorrow.bg", 1, 2);
+
+SELECT * 
+FROM td_users;
+
+DELETE FROM td_users;
+TRUNCATE TABLE td_users;
+
+
+-- Искам да покажа цялата информация за един служител
+-- Кой е той ? 
+-- Къде работи ? 
+-- Какво работи ? 
+
+SELECT 
+	a.first_name, 
+    a.last_name,
+    a.extra_name,
+    a.address,
+    a.phone,
+    a.email,
+    td_departments.title AS department_name,
+    td_occupations.title AS occupations_name
+FROM td_users AS a
+	INNER JOIN td_departments ON a.department_id = td_departments.id
+    INNER JOIN td_occupations ON a.occupation_id = td_occupations.id
+WHERE td_departments.is_active = 0
+
+
+-- Таблица със заплатите на месечна база-- 
+CREATE TABLE td_salaries(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    month INT,
+    amount DECIMAL,
+    user_id INT
+)
+
+-- Заявки за промяна на структура на таблица (ALTER)
+ALTER TABLE td_salaries
+ADD amount_gross DECIMAL;
+
+ALTER TABLE td_salaries
+ADD amount_net DECIMAL;
+
+--
+SELECT id, month, user_id, amount, amount_gross FROM td_salaries;
+
+-- Създаване на листинг на имената на всички отдели в банката
+CREATE TABLE td_clients (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+     title VARCHAR(150),
+     
+	first_name VARCHAR(150)  NOT NULL,
+    last_name VARCHAR(150)  NOT NULL,
+    extra_name VARCHAR(150),
+    address VARCHAR(150)  NOT NULL,
+    phone VARCHAR(10)  NOT NULL,
+    email VARCHAR(150)  NOT NULL
+);
+-- INSERT INTO td_clients VALUES('first_name');
+-- INSERT INTO td_clients VALUES('last_name');
+-- INSERT INTO td_clients VALUES('extra_name');
+-- INSERT INTO td_clients VALUES('address');
+-- INSERT INTO td_clients VALUES('phone');
+-- INSERT INTO td_clients VALUES('email');
+
+SELECT * FROM td_clients;
+
+-- Създаване на банкови сметки в BGN
+ALTER TABLE td_clients
+ADD bank_account VARCHAR(255) DEFAULT "BGN";
+
+
+-- Създаване на банковата структура по отдели
+CREATE TABLE td_bank_departments (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+     title VARCHAR(150),
+     
+	board_of_directors VARCHAR(150) NOT NULL,
+    credit_department VARCHAR(150) NOT NULL,
+    investment_department VARCHAR(150) NOT NULL,
+    administration VARCHAR(150) NOT NULL,
+    marketing_department VARCHAR(10) NOT NULL,
+    audit_department VARCHAR(150) NOT NULL
+);
+-- Създаване на листинг с месечните възнаграждения на служителите
+CREATE TABLE td_months_salaries (
+SELECT 
+	a.first_name, 
+    a.last_name,
+	b.amount_gross
+FROM td_users AS a, td_salaries AS b
+);
+
+SELECT * 
+FROM td_months_salaries;
+
+-- Създаване на листинг с имената на всички служители в банката
+CREATE TABLE td_accounts_names (
+email VARCHAR(150) NOT NULL
+);
+
+-- Избиране на имейли + добавяне на домейн към тях
+SELECT concat( LOWER(a.first_name), ".", LOWER(a.last_name)),
+email AS "@bankoftomorrow"
+FROM td_users AS a;
+
+
+-- Добавяне на години на служителите
+ALTER TABLE td_users
+ADD years VARCHAR(10);
+
+-- Листинг на служителите като старши (над 5 години) и обратно
+SELECT years,
+CASE
+    WHEN years >= 5 THEN 'The employee is senior'
+    ELSE 'The employee is new'
+END AS years_person
+FROM td_users;
+
+-- Избиране на служителите, в чиито имена се съдържа буквата S
+SELECT SUBSTR("S", 1) AS person_s
+FROM td_users;
+
+-- Създаване на таблица за чуждестранни служители
+ALTER TABLE td_users
+ADD foreign_person VARCHAR(30);
+
+-- Избиране на чуждестранните служители според националността им
+SELECT foreign_person,
+CASE
+    WHEN foreign_person = "Bulgaria" THEN 'The employee is Bulgarian'
+    ELSE 'The employee is foreign person'
+END
+FROM td_users;
+
+-- Избиране на служители, чиито имена съдържат буквата I
+SELECT first_name, last_name,
+SUBSTR("I", 1) AS person_s
+FROM td_users
